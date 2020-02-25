@@ -7,6 +7,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
+from ptt import PTT
 
 app = Flask(__name__)
 
@@ -37,8 +38,14 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = TextSendMessage(text=event.message.text)
-    line_bot_api.reply_message(event.reply_token, message)
-
+    #message = TextSendMessage(text=event.message.text)
+    #line_bot_api.reply_message(event.reply_token, message)
+    if event.message.text == 'PTT':
+        abc = PTT().PTT_Crawler()
+        message = TextSendMessage(text=abc)
+        line_bot_api.reply_message(event.reply_token,message)
+    else:
+        message = TextSendMessage(text=event.message.text)
+        line_bot_api.reply_message(event.reply_token,message)
 if __name__ == "__main__":
     app.run(threaded=True, port=5000)
