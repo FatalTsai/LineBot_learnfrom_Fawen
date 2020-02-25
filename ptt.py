@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 
 class PTT():
-    def PTT_Crawler():
+    def PTT_Crawler(self):
         title = ""
         # 下載 Dcard 標題
         r = requests.get("https://www.ptt.cc/bbs/SENIORHIGH/index.html")
